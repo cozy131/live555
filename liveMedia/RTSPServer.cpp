@@ -1423,7 +1423,7 @@ void RTSPServer::RTSPClientSession
       switch (streamingMode) {
           case RTP_UDP: {
 	    snprintf((char*)ourClientConnection->fResponseBuffer, sizeof ourClientConnection->fResponseBuffer,
-		     "RTSP/1.0 200 OK\r\n"
+		     "RTSP/1.0 201 OK\r\n"
 		     "CSeq: %s\r\n"
 		     "%s"
 		     "Transport: RTP/AVP;multicast;destination=%s;source=%s;port=%d-%d;ttl=%d\r\n"
@@ -1441,7 +1441,7 @@ void RTSPServer::RTSPClientSession
 	  }
           case RAW_UDP: {
 	    snprintf((char*)ourClientConnection->fResponseBuffer, sizeof ourClientConnection->fResponseBuffer,
-		     "RTSP/1.0 200 OK\r\n"
+		     "RTSP/1.0 201 OK\r\n"
 		     "CSeq: %s\r\n"
 		     "%s"
 		     "Transport: %s;multicast;destination=%s;source=%s;port=%d;ttl=%d\r\n"
@@ -1457,7 +1457,7 @@ void RTSPServer::RTSPClientSession
       switch (streamingMode) {
           case RTP_UDP: {
 	    snprintf((char*)ourClientConnection->fResponseBuffer, sizeof ourClientConnection->fResponseBuffer,
-		     "RTSP/1.0 200 OK\r\n"
+		     "RTSP/1.0 201 OK\r\n"
 		     "CSeq: %s\r\n"
 		     "%s"
 		     "Transport: RTP/AVP;unicast;destination=%s;source=%s;client_port=%d-%d;server_port=%d-%d\r\n"
@@ -1473,7 +1473,7 @@ void RTSPServer::RTSPClientSession
 	      ourClientConnection->handleCmd_unsupportedTransport();
 	    } else {
 	      snprintf((char*)ourClientConnection->fResponseBuffer, sizeof ourClientConnection->fResponseBuffer,
-		       "RTSP/1.0 200 OK\r\n"
+		       "RTSP/1.0 201 OK\r\n"
 		       "CSeq: %s\r\n"
 		       "%s"
 		       "Transport: RTP/AVP/TCP;unicast;destination=%s;source=%s;interleaved=%d-%d\r\n"
@@ -1487,7 +1487,7 @@ void RTSPServer::RTSPClientSession
 	  }
           case RAW_UDP: {
 	    snprintf((char*)ourClientConnection->fResponseBuffer, sizeof ourClientConnection->fResponseBuffer,
-		     "RTSP/1.0 200 OK\r\n"
+		     "RTSP/1.0 201 OK\r\n"
 		     "CSeq: %s\r\n"
 		     "%s"
 		     "Transport: %s;unicast;destination=%s;source=%s;client_port=%d;server_port=%d\r\n"
@@ -1582,7 +1582,7 @@ void RTSPServer::RTSPClientSession
     }
   }
   
-  setRTSPResponse(ourClientConnection, "200 OK");
+  setRTSPResponse(ourClientConnection, "206 OK");
   
   // Optimization: If all subsessions have now been torn down, then we know that we can reclaim our object now.
   // (Without this optimization, however, this object would still get reclaimed later, as a result of a 'liveness' timeout.)
@@ -1790,7 +1790,7 @@ void RTSPServer::RTSPClientSession
   
   // Fill in the response:
   snprintf((char*)ourClientConnection->fResponseBuffer, sizeof ourClientConnection->fResponseBuffer,
-	   "RTSP/1.0 200 OK\r\n"
+	   "RTSP/1.0 202 OK\r\n"
 	   "CSeq: %s\r\n"
 	   "%s"
 	   "%s"
@@ -1819,7 +1819,7 @@ void RTSPServer::RTSPClientSession
     }
   }
   
-  setRTSPResponse(ourClientConnection, "200 OK", fOurSessionId);
+  setRTSPResponse(ourClientConnection, "203 OK", fOurSessionId);
 }
 
 void RTSPServer::RTSPClientSession
@@ -1828,7 +1828,7 @@ void RTSPServer::RTSPClientSession
   // By default, we implement "GET_PARAMETER" just as a 'keep alive', and send back a dummy response.
   // (If you want to handle "GET_PARAMETER" properly, you can do so by defining a subclass of "RTSPServer"
   // and "RTSPServer::RTSPClientSession", and then reimplement this virtual function in your subclass.)
-  setRTSPResponse(ourClientConnection, "200 OK", fOurSessionId, LIVEMEDIA_LIBRARY_VERSION_STRING);
+  setRTSPResponse(ourClientConnection, "204 OK", fOurSessionId, LIVEMEDIA_LIBRARY_VERSION_STRING);
 }
 
 void RTSPServer::RTSPClientSession
@@ -1837,7 +1837,7 @@ void RTSPServer::RTSPClientSession
   // By default, we implement "SET_PARAMETER" just as a 'keep alive', and send back an empty response.
   // (If you want to handle "SET_PARAMETER" properly, you can do so by defining a subclass of "RTSPServer"
   // and "RTSPServer::RTSPClientSession", and then reimplement this virtual function in your subclass.)
-  setRTSPResponse(ourClientConnection, "200 OK", fOurSessionId);
+  setRTSPResponse(ourClientConnection, "205 OK", fOurSessionId);
 }
 
 GenericMediaServer::ClientConnection*
