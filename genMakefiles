@@ -1,7 +1,7 @@
 #!/bin/sh
 
 usage() {
-    echo "Usage: $0 <os-platform>"
+    echo "Usage: $0 <os-platform>\n for aflgo-snap, first type "linux1", second type "linux2""
     exit 1
 }
 
