@@ -1,7 +1,7 @@
 COMPILE_OPTS =		$(INCLUDES) -I. -O2 -DSOCKLEN_T=socklen_t -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64 -DALLOW_RTSP_SERVER_PORT_REUSE=1
 CC = $(AFLGO)/instrument/aflgo-clang
 CXX = $(AFLGO)/instrument/aflgo-clang++
-ADDITIONAL = -distance=$(TMP_DIR)/distance.cfg.txt -flto -fuse-ld=gold
+ADDITIONAL = -distance=$(TMP_DIR)/distance.cfg.txt -flto -fuse-ld=gold -Wl,-plugin-opt=save-temps
 CFLAGS = $(ADDITIONAL)
 CXXFLAGS = $(ADDITIONAL)
 C =			c
